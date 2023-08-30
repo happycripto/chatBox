@@ -21,3 +21,18 @@ const server = app.listen(8080, () => {
 })
 
 const io = new Server(server); 
+
+let messages = [];
+
+io.on('connection', socket => {
+    console.log('Nuevo cliente conectado');
+
+    socket.on('message', data => {
+        messages.push(data);
+        io.emit('messageLogs', messages);
+    })
+
+    socket.on('authenticated', data=> {
+        socket.broadcast.emit('newUserConnected', data);
+    })
+})
