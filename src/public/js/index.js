@@ -12,7 +12,8 @@ Swal.fire({
     },
     allowOutsideClick: false
 }).then(result => {
-    user =result.value
+    user = result.value
+    socket.emit('authenticated', user);
 })
 
 chatBox.addEventListener('keyup', evt => {

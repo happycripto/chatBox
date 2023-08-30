@@ -3,6 +3,7 @@ import handlebars from 'express-handlebars'
 import __dirname from './utils.js'
 import { Server } from "socket.io";
 import viewRouter from "./routes/views.js";
+import usersRouter from "./routes/users.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(express.static(__dirname + '/public'));
 
 app.use('/', viewRouter);
+app.use('/', usersRouter);
 
 
 const server = app.listen(8080, () => {
